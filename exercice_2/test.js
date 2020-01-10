@@ -14,22 +14,22 @@ QUnit.test('TicTacToe inherit from Observable', function(assert) {
 });
 
 QUnit.test('TicTacToe constructor', function(assert) {
-	let game = new TicTacToe();
-    let observable = new Observable();
+	var game = new TicTacToe();
+    var observable = new Observable();
     
     assert.ok(Object.keys(observable).every(key => game[key]));
 
 	assert.equal(game.currentPlayer, 0);
 	assert.ok(Array.isArray(game.grid));
 	assert.equal(game.grid.length, 3);
-	for(let line = 0; line < 3; ++line) {
+	for(var line = 0; line < 3; ++line) {
 		assert.ok(Array.isArray(game.grid[line]));
 		assert.equal(game.grid[line].length, 3);
 	}
 });
 
 QUnit.test('TicTacToe play - player id', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 
 	assert.equal(0, game.currentPlayer);
 	game.play(0,0);
@@ -41,7 +41,7 @@ QUnit.test('TicTacToe play - player id', function(assert) {
 });
 
 QUnit.test('TicTacToe play - grid state', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 
 	game.play(0,0);
 	assert.equal(0, game.grid[0][0]);
@@ -59,7 +59,7 @@ QUnit.test('TicTacToe play - grid state', function(assert) {
 });
 
 QUnit.test('TicTacToe getCurrentPlayer', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 
 	assert.equal(0, game.getCurrentPlayer());
 	game.play(0,0);
@@ -71,7 +71,7 @@ QUnit.test('TicTacToe getCurrentPlayer', function(assert) {
 });
 
 QUnit.test('TicTacToe getCaseState', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 
 	game.play(0,0);
 	assert.equal(0, game.getCaseState(0, 0));
@@ -89,7 +89,7 @@ QUnit.test('TicTacToe getCaseState', function(assert) {
 });
 
 QUnit.test('TicTacToe reset', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 
 	game.play(0,0);
 	game.play(0,1);
@@ -97,8 +97,8 @@ QUnit.test('TicTacToe reset', function(assert) {
 	game.play(1,1);
 	game.play(2,2);
 	game.reset();
-	for(let x = 0; x < 3; ++x) {
-		for(let y = 0; y < 3; ++y) {
+	for(var x = 0; x < 3; ++x) {
+		for(var y = 0; y < 3; ++y) {
 			assert.equal(game.getCaseState(x, y), undefined);
 		}
 	}
@@ -106,7 +106,8 @@ QUnit.test('TicTacToe reset', function(assert) {
 });
 
 QUnit.test('TicTacToe win column', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
+	console.log(game.isFinished());
 	assert.ok(!game.isFinished());
 	game.play(1,1);
 	game.play(0,0);
@@ -120,7 +121,7 @@ QUnit.test('TicTacToe win column', function(assert) {
 });
 
 QUnit.test('TicTacToe win line', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 	assert.ok(!game.isFinished());
 	game.play(1,1);
 	game.play(0,0);
@@ -135,7 +136,7 @@ QUnit.test('TicTacToe win line', function(assert) {
 });
 
 QUnit.test('TicTacToe win diag', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 	assert.ok(!game.isFinished());
 	game.play(0,0);
 	game.play(0,2);
@@ -150,7 +151,7 @@ QUnit.test('TicTacToe win diag', function(assert) {
 });
 
 QUnit.test('TicTacToe mate', function(assert) {
-	let game = new TicTacToe();
+	var game = new TicTacToe();
 	assert.ok(!game.isFinished());
 	game.play(1,1);
 	game.play(0,0);
