@@ -107,7 +107,6 @@ QUnit.test('TicTacToe reset', function(assert) {
 
 QUnit.test('TicTacToe win column', function(assert) {
 	var game = new TicTacToe();
-	console.log(game.isFinished());
 	assert.ok(!game.isFinished());
 	game.play(1,1);
 	game.play(0,0);

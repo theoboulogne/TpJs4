@@ -3,47 +3,52 @@ var Fin =  (function(){
         ligne : (grid, y) => 
         {
             let val = grid[0][y];
-            for(let i=1; i<3; i++){
-                if(val != grid[i][y]){
-                    return false; // pas alligné
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if((val != grid[i][y]) || (grid[i][y] == undefined)){
+                        return false; // pas alligné
+                    }
                 }
+                return true;
             }
-            return true;
         },
         colonne : (grid, x) => 
         {
             let val = grid[x][0];
-            for(let i=1; i<3; i++){
-                if(val != grid[x][i]){
-                    return false; // pas alligné
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if((val != grid[x][i]) || (grid[x][i] == undefined)){
+                        return false; // pas alligné
+                    }
                 }
+                return true;
             }
-            return true;
         },
         diagonale : (grid) => 
         {
             let val = grid[0][0];
 
             //if val != undefined alors on teste
-
-
-
-            for(let i=1; i<3; i++){
-                if(val != grid[i][i]){
-                    break; // pas alligné
-                }
-                else if(i==2){ // alligné
-                    return true
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if((val != grid[i][i]) || (grid[i][i] == undefined)){
+                        break; // pas alligné
+                    }
+                    else if(i==2){ // alligné
+                        return true
+                    }
                 }
             }
 
             val = grid[0][2];
-            for(let i=1; i<3; i++){
-                if(val != grid[i][2-i]){
-                    break; // pas alligné
-                }
-                else if(i==2){ // alligné
-                    return true
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if((val != grid[i][2-i]) || (grid[i][2-i] == undefined)){
+                        break; // pas alligné
+                    }
+                    else if(i==2){ // alligné
+                        return true
+                    }
                 }
             }
 
@@ -76,9 +81,11 @@ class TicTacToe extends Observable {
     getCurrentPlayer(){
         return this.currentPlayer;
     }
+
     getCaseState(x, y){
         return this.grid[x][y];
     }
+
     reset(){
         //Init CurrentPlayer
         this.currentPlayer = 0;
