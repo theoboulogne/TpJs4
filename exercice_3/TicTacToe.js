@@ -3,42 +3,52 @@ var Fin =  (function(){
         ligne : (grid, y) => 
         {
             let val = grid[0][y];
-            for(let i=1; i<3; i++){
-                if(val != grid[i][y]){
-                    return false; // pas alligné
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if(val != grid[i][y]){
+                        return false; // pas alligné
+                    }
                 }
+                return true;
             }
-            return true;
         },
         colonne : (grid, x) => 
         {
             let val = grid[x][0];
-            for(let i=1; i<3; i++){
-                if(val != grid[x][i]){
-                    return false; // pas alligné
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if(val != grid[x][i]){
+                        return false; // pas alligné
+                    }
                 }
+                return true;
             }
-            return true;
         },
         diagonale : (grid) => 
         {
             let val = grid[0][0];
-            for(let i=1; i<3; i++){
-                if(val != grid[i][i]){
-                    break; // pas alligné
-                }
-                else if(i==2){ // alligné
-                    return true
+
+            //if val != undefined alors on teste
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if(val != grid[i][i]){
+                        break; // pas alligné
+                    }
+                    else if(i==2){ // alligné
+                        return true
+                    }
                 }
             }
 
             val = grid[0][2];
-            for(let i=1; i<3; i++){
-                if(val != grid[i][2-i]){
-                    break; // pas alligné
-                }
-                else if(i==2){ // alligné
-                    return true
+            if(val != undefined){
+                for(let i=1; i<3; i++){
+                    if(val != grid[i][2-i]){
+                        break; // pas alligné
+                    }
+                    else if(i==2){ // alligné
+                        return true
+                    }
                 }
             }
 
@@ -46,7 +56,6 @@ var Fin =  (function(){
         },
     }
 })();
-
 
 class TicTacToe extends Observable {
     constructor(){
@@ -85,6 +94,10 @@ class TicTacToe extends Observable {
                 //On définit toutes les cases sur undefined
                 this.grid[i][j]=undefined;
             }
+        }
+
+        while(document.getElementById("game")!=undefined){
+            document.getElementById("game").remove();
         }
     }
 
