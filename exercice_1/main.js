@@ -21,7 +21,7 @@
 	observableObject.trigger('win', 'Bob');
 	observableObject.trigger('move', 'Alice', 2, 1);
 
-	observableObject.off('win', winCallback);
+	//observableObject.off('win', winCallback);
 	observableObject.trigger('win', 'Alice');
 	observableObject.trigger('move', 'Bob', 1, 1);
 
