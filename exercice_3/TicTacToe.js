@@ -85,20 +85,25 @@ class TicTacToe extends Observable {
     }
 
     reset(){
-        //Init CurrentPlayer
-        this.currentPlayer = 0;
+        
+        setTimeout(() => {
+            //Init CurrentPlayer
+            this.currentPlayer = 0;
 
-        //Init Grid
-        for(let i=0; i<3; i++){
-            for(let j=0; j<3; j++){
-                //On définit toutes les cases sur undefined
-                this.grid[i][j]=undefined;
+            //Init Grid
+            for(let i=0; i<3; i++){
+                for(let j=0; j<3; j++){
+                    //On définit toutes les cases sur undefined
+                    this.grid[i][j]=undefined;
+                }
             }
-        }
+            
 
-        while(document.getElementById("game")!=undefined){
-            document.getElementById("game").remove();
-        }
+            while(document.getElementById("game")!=undefined){
+                document.getElementById("game").remove();
+            }
+
+        }, 1800);
     }
 
     play(x, y){
