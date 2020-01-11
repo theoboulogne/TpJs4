@@ -3,10 +3,10 @@ function playEvent(morpion, casetab, x, y){
 
         let img = document.createElement("img");
         if(morpion.currentPlayer==0){
-            img.src = "x.png"
+            img.src = "img/x.png"
         }
         else {
-            img.src = "o.png"
+            img.src = "img/o.png"
         }
         img.setAttribute("id", "game");
 

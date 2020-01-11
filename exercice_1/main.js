@@ -21,8 +21,8 @@
 	observableObject.trigger('win', 'Bob');
 	observableObject.trigger('move', 'Alice', 2, 1);
 
-	//observableObject.off('win', winCallback);
-	observableObject.trigger('win', 'Alice');
+	observableObject.off('win', winCallback); 
+	observableObject.trigger('win', 'Alice'); // Erreur générée car élément retiré avec le off précédent
 	observableObject.trigger('move', 'Bob', 1, 1);
 
 })();

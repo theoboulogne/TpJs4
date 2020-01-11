@@ -57,11 +57,9 @@ var Fin =  (function(){
     }
 })();
 
-
 class TicTacToe extends Observable {
     constructor(){
-        
-        //Init de Observable
+
         super();
 
         //Init CurrentPlayer
@@ -82,22 +80,58 @@ class TicTacToe extends Observable {
     getCurrentPlayer(){
         return this.currentPlayer;
     }
-
     getCaseState(x, y){
         return this.grid[x][y];
     }
 
     reset(){
-        //Init CurrentPlayer
-        this.currentPlayer = 0;
+        
+		/* 										| Sous commentaire car utilisé que dans l'exo 3 |
+		
+        let bouton = document.getElementById("reset")
+        bouton.innerHTML = "Chargement..    "
+        bouton.setAttribute("class", "btn btn-primary")
+        bouton.disabled = true
 
-        //Init Grid
-        for(let i=0; i<3; i++){
-            for(let j=0; j<3; j++){
-                //On définit toutes les cases sur undefined
-                this.grid[i][j]=undefined;
+        let spinner = document.createElement("span");
+        spinner.setAttribute("id", "load");
+        spinner.setAttribute("class", "spinner-border spinner-border-sm");
+        spinner.setAttribute("role", "status");
+        spinner.setAttribute("aria-hidden", "true");
+        bouton.appendChild(spinner);
+		
+        setTimeout(() => {
+			
+		*/ 
+            //Init CurrentPlayer
+            this.currentPlayer = 0;
+			
+            //changePlayer(1); 					| Sous commentaire car utilisé que dans l'exo 3 |
+
+            //Init Grid
+            for(let i=0; i<3; i++){
+                for(let j=0; j<3; j++){
+                    //On définit toutes les cases sur undefined
+                    this.grid[i][j]=undefined;
+                }
             }
-        }
+            
+		/* 										| Sous commentaire car utilisé que dans l'exo 3 |
+			
+            while(document.getElementById("game")!=undefined){
+                document.getElementById("game").remove();
+            }
+            
+            bouton.innerHTML = "Réinitialisation";
+            bouton.setAttribute("class", "btn btn-danger");
+            bouton.disabled = false;
+            while(document.getElementById("load")!=undefined){
+                document.getElementById("load").remove();
+            }
+			
+        }, 1800);
+		*/
+
     }
 
     play(x, y){
