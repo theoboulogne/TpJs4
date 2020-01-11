@@ -57,9 +57,11 @@ var Fin =  (function(){
     }
 })();
 
+
 class TicTacToe extends Observable {
     constructor(){
-
+        
+        //Init de Observable
         super();
 
         //Init CurrentPlayer
@@ -80,27 +82,22 @@ class TicTacToe extends Observable {
     getCurrentPlayer(){
         return this.currentPlayer;
     }
+
     getCaseState(x, y){
         return this.grid[x][y];
     }
 
     reset(){
-        
-        setTimeout(() => {
-            //Init CurrentPlayer
-            this.currentPlayer = 0;
-            changePlayer(1);
+        //Init CurrentPlayer
+        this.currentPlayer = 0;
 
-            //Init Grid
-            for(let i=0; i<3; i++){
-                for(let j=0; j<3; j++){
-                    //On définit toutes les cases sur undefined
-                    this.grid[i][j]=undefined;
-                }
+        //Init Grid
+        for(let i=0; i<3; i++){
+            for(let j=0; j<3; j++){
+                //On définit toutes les cases sur undefined
+                this.grid[i][j]=undefined;
             }
-
-        }, 1800);
-
+        }
     }
 
     play(x, y){
