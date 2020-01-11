@@ -86,9 +86,22 @@ class TicTacToe extends Observable {
 
     reset(){
         
+        let bouton = document.getElementById("reset")
+        bouton.innerHTML = "Chargement..    "
+        bouton.setAttribute("class", "btn btn-primary")
+        bouton.disabled = true
+
+        let spinner = document.createElement("span");
+        spinner.setAttribute("id", "load");
+        spinner.setAttribute("class", "spinner-border spinner-border-sm");
+        spinner.setAttribute("role", "status");
+        spinner.setAttribute("aria-hidden", "true");
+        bouton.appendChild(spinner);
+
         setTimeout(() => {
             //Init CurrentPlayer
             this.currentPlayer = 0;
+            changePlayer(1);
 
             //Init Grid
             for(let i=0; i<3; i++){
@@ -102,8 +115,16 @@ class TicTacToe extends Observable {
             while(document.getElementById("game")!=undefined){
                 document.getElementById("game").remove();
             }
+            
+            bouton.innerHTML = "Réinitialisation";
+            bouton.setAttribute("class", "btn btn-danger");
+            bouton.disabled = false;
+            while(document.getElementById("load")!=undefined){
+                document.getElementById("load").remove();
+            }
 
         }, 1800);
+
     }
 
     play(x, y){
