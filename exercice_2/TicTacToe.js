@@ -27,8 +27,6 @@ var Fin =  (function(){
         diagonale : (grid) => 
         {
             let val = grid[0][0];
-
-            //if val != undefined alors on teste
             if(val != undefined){
                 for(let i=1; i<3; i++){
                     if(val != grid[i][i]){

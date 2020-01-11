@@ -1,3 +1,16 @@
+/* Modules
+Choix image(src) + creation(element+attribute)
+
+Retirer casetab et utiliser x,y pour récupérer x,y avec une fonction ((x,y) -> casetab)
+
+changeplayer + switchalert ( mettre le +1 de base dedans et utiliser un module pour modifier l'innerhtml d'un id)
+
+alert a gérer en module (1 pour gagnant, 1 pour afficher, 1 pour retirer et 1 qui appl les 2 premiers)
+
+module add event listener click sur un id spécifique avec une fonction en entrée
+
+*/
+
 function playEvent(morpion, casetab, x, y){
     if(morpion.getCaseState(x,y)==undefined){
 
@@ -18,10 +31,8 @@ function playEvent(morpion, casetab, x, y){
         if (morpion.hasWinner()) {
             switchalert(morpion.getWinner() + 1);
             morpion.reset()
-        }else{
-            if(morpion.isFinished()){
-                morpion.reset()
-            }
+        }else if(morpion.isFinished()){
+            morpion.reset()
         }
     }
 }
@@ -44,16 +55,15 @@ function changePlayer(nb){
 
 class TicTacToeView {
     constructor(game, pseudo){
-        this.morpion = game;
+        this.morpion = game; // utilité a verifier ( passer en argument de init game directement)
         changePlayer(this.morpion.currentPlayer + 1); // +1 pour avoir joueur 1 ou 2
         this.initEvent();
     }
 
     initEvent(){
-        document.getElementById("fin").style.display = "none";
+        document.getElementById("fin").style.display = "none"; // -> closealert()
         
         let table = document.getElementById("morpion");
-        let morpion = this.morpion;
         for(let i=0; i<3; i++) {
             for(let j=0; j<3; j++) {
                 table.firstElementChild.children[i].children[j].addEventListener("click", function(){

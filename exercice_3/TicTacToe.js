@@ -1,3 +1,17 @@
+/*Modules :
+Pour fin : fonction qui prend les indices pour faire la boucle le return etc
+ + changer fonctions lignes / colonnes pour tester les 3 d'un coup ( non a pas faire pour le getwinner)
+
+pour les boutons: chargement / reinitialisation
+
+pour remove : while undefined remove
+
+pour init grid a undefined
+
+
+*/
+
+
 var Fin =  (function(){
     return{
         ligne : (grid, y) => 
