@@ -1,4 +1,4 @@
-var test =  (function(){
+let test =  (function(){
     function ligne(grid) 
         {
             for(let j=0; j<3; j++){
