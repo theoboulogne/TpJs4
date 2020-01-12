@@ -61,6 +61,7 @@ var Fin =  (function(){
 class TicTacToe extends Observable {
     constructor(){
         
+        //Init de Observable
         super();
 
         //Init CurrentPlayer
