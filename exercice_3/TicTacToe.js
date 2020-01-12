@@ -3,6 +3,9 @@ var Fin =  (function(){
         ligne : (grid, y) => 
         {
             let val = grid[0][y];
+
+            //si (val = undefined) alors on teste pas
+            
             if(val != undefined){
                 for(let i=1; i<3; i++){
                     if(val != grid[i][y]){
@@ -15,6 +18,9 @@ var Fin =  (function(){
         colonne : (grid, x) => 
         {
             let val = grid[x][0];
+
+            //si (val = undefined) alors on teste pas
+
             if(val != undefined){
                 for(let i=1; i<3; i++){
                     if(val != grid[x][i]){
@@ -28,7 +34,8 @@ var Fin =  (function(){
         {
             let val = grid[0][0];
 
-            //if val != undefined alors on teste
+            //si (val = undefined) alors on teste pas
+
             if(val != undefined){
                 for(let i=1; i<3; i++){
                     if(val != grid[i][i]){
@@ -41,6 +48,9 @@ var Fin =  (function(){
             }
 
             val = grid[0][2];
+
+            //si (val = undefined) alors on teste pas
+
             if(val != undefined){
                 for(let i=1; i<3; i++){
                     if(val != grid[i][2-i]){
