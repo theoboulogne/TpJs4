@@ -1,182 +1,120 @@
-/*Modules :
-Pour fin : fonction qui prend les indices pour faire la boucle le return etc
- + changer fonctions lignes / colonnes pour tester les 3 d'un coup ( non a pas faire pour le getwinner)
-
-pour les boutons: chargement / reinitialisation
-
-pour remove : while undefined remove
-
-pour init grid a undefined
-
-
-*/
-
-
-var Fin =  (function(){
-    return{
-        ligne : (grid, y) => 
+let test =  (function(){
+    function ligne(grid) 
         {
-            let val = grid[0][y];
-            if(val != undefined){
-                for(let i=1; i<3; i++){
-                    if(val != grid[i][y]){
-                        return false; // pas alligné
-                    }
+            for(let j=0; j<3; j++){
+                let val = grid[0][j];
+                if(val != undefined) for(let i=1; i<3; i++){
+                    if(val != grid[i][j]) break; // pas alligné
+                    else if(i==2) return val// alligné
                 }
-                return true;
             }
-        },
-        colonne : (grid, x) => 
+            return 2;
+        }
+    function colonne(grid)
         {
-            let val = grid[x][0];
-            if(val != undefined){
-                for(let i=1; i<3; i++){
-                    if(val != grid[x][i]){
-                        return false; // pas alligné
-                    }
+            for(let j=0; j<3; j++){
+                let val = grid[j][0];
+                if(val != undefined) for(let i=1; i<3; i++){
+                    if(val != grid[j][i]) break; // pas alligné
+                    else if(i==2) return val; // alligné
                 }
-                return true;
             }
-        },
-        diagonale : (grid) => 
+            return 2;
+        }
+    function diagonale (grid) 
         {
             let val = grid[0][0];
-
-            //if val != undefined alors on teste
-            if(val != undefined){
-                for(let i=1; i<3; i++){
-                    if(val != grid[i][i]){
-                        break; // pas alligné
-                    }
-                    else if(i==2){ // alligné
-                        return true
-                    }
+            if(val != undefined) for(let i=1; i<3; i++){
+                if(val != grid[i][i]){
+                    break; // pas alligné
+                }
+                else if(i==2){ // alligné
+                    return val
                 }
             }
 
             val = grid[0][2];
-            if(val != undefined){
-                for(let i=1; i<3; i++){
-                    if(val != grid[i][2-i]){
-                        break; // pas alligné
-                    }
-                    else if(i==2){ // alligné
-                        return true
-                    }
+            if(val != undefined) for(let i=1; i<3; i++){
+                if(val != grid[i][2-i]){
+                    break; // pas alligné
+                }
+                else if(i==2){ // alligné
+                    return val
                 }
             }
 
-            return false; // si pas alligné
+            return 2; // si pas alligné
+        }
+    return{
+        Fin : (grid) =>
+        {   // On enregistre en mémoire pour réduire le nombre d'appel de fonction en cas de renvoi
+            let tmp = diagonale(grid); 
+            if(tmp == 2) tmp = ligne(grid);
+            if(tmp == 2) tmp = colonne(grid);
+
+            if(tmp !=2) return tmp;
+            return undefined;
+        },
+        CaseLibre : (grid) => {
+            for(let i=0; i<3; i++) for(let j=0; j<3; j++){
+                if(grid[i][j]==undefined) return false; // si case libre
+            }
+            return true; // si terrain plein
         },
     }
 })();
 
 class TicTacToe extends Observable {
     constructor(){
-
         super();
 
-        //Init CurrentPlayer
-        this.currentPlayer = 0;
+        this.grid = [];// Déclaration du tableau
+        for(let i=0; i<3; i++) this.grid[i] = [];
 
-        //Init Grid
-        this.grid = [];
-        for(let i=0; i<3; i++){
-            this.grid[i] = [];
-            for(let j=0; j<3; j++){
-                //On définit toutes les cases sur undefined
-                this.grid[i][j]=undefined;
-            }
-        }
-
+        this.reset(); // Reset pour définir le currentPlayer ainsi que pour initialiser la grid
     }
     
-    getCurrentPlayer(){
+    switchCurrentPlayer(){
+        if(this.getCurrentPlayer()==0) this.currentPlayer = 1;
+        else this.currentPlayer = 0;
+    }
+
+    getCurrentPlayer() {
         return this.currentPlayer;
     }
-    getCaseState(x, y){
+    
+    getCaseState(x, y) {
         return this.grid[x][y];
     }
 
-    reset(){
-        
-        let bouton = document.getElementById("reset")
-        bouton.innerHTML = "Chargement..    "
-        bouton.setAttribute("class", "btn btn-primary")
-        bouton.disabled = true
-
-        let spinner = document.createElement("span");
-        spinner.setAttribute("id", "load");
-        spinner.setAttribute("class", "spinner-border spinner-border-sm");
-        spinner.setAttribute("role", "status");
-        spinner.setAttribute("aria-hidden", "true");
-        bouton.appendChild(spinner);
-
-        setTimeout(() => {
-            //Init CurrentPlayer
-            this.currentPlayer = 0;
-            changePlayer(1);
-
-            //Init Grid
-            for(let i=0; i<3; i++){
-                for(let j=0; j<3; j++){
-                    //On définit toutes les cases sur undefined
-                    this.grid[i][j]=undefined;
-                }
-            }
-            
-
-            while(document.getElementById("game")!=undefined){
-                document.getElementById("game").remove();
-            }
-            
-            bouton.innerHTML = "Réinitialisation";
-            bouton.setAttribute("class", "btn btn-danger");
-            bouton.disabled = false;
-            while(document.getElementById("load")!=undefined){
-                document.getElementById("load").remove();
-            }
-
-        }, 1800);
-
+    setGridUndefined(){//Init Grid sur undefined
+        for(let i=0; i<3; i++) for(let j=0; j<3; j++){
+            this.grid[i][j]=undefined; //On définit toutes les cases sur undefined
+        }
     }
 
-    play(x, y){
-        //On joue le coût et on change le joueur actuel
-        this.grid[x][y] = this.getCurrentPlayer();
+    reset(){
+        this.currentPlayer = 0;//Init CurrentPlayer
+        this.setGridUndefined();//Init Grid
+    }
 
-        if(this.getCurrentPlayer()==0) this.currentPlayer++;
-        else this.currentPlayer = 0;
+    play(x, y){//On joue le coût et on change le joueur actuel
+        this.grid[x][y] = this.getCurrentPlayer();
+        this.switchCurrentPlayer();
     }
     
     hasWinner(){
-        if(Fin.diagonale(this.grid)) return true;
-        for(let i=0; i<3; i++){
-            if(Fin.ligne(this.grid, i)) return true;
-            if(Fin.colonne(this.grid, i)) return true;
-        }
-        return false;
+        if(this.getWinner()!=undefined) return true;
+        else return false;
     }
-    
-    getWinner(){
-        if(Fin.diagonale(this.grid)) return this.getCaseState(1,1);
-        for(let i=0; i<3; i++){
-            if(Fin.ligne(this.grid, i)) return this.getCaseState(1,i);
-            if(Fin.colonne(this.grid, i)) return this.getCaseState(i,1);
-        }
-        return undefined;
+
+    getWinner() {
+        return test.Fin(this.grid);
     }
 
     isFinished(){
-        if(this.hasWinner()) return true; // joueur a gagné
-        for(let i=0; i<3; i++){
-            for(let j=0; j<3; j++){
-                if(this.grid[i][j]==undefined){
-                    return false; // case libre
-                }
-            }
-        }
-        return true; // terrain plein
+        if(this.hasWinner()) return true; // si joueur a gagné
+        return test.CaseLibre(this.grid);
     }
 
 }
