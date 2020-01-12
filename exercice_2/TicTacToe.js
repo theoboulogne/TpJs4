@@ -1,4 +1,4 @@
-var Fin =  (function(){
+let Fin =  (function(){
     return{
         ligne : (grid, y) => 
         {

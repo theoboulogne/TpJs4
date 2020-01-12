@@ -1,11 +1,11 @@
-var Fin =  (function(){
+let Fin =  (function(){
     return{
         ligne : (grid, y) => 
         {
             let val = grid[0][y];
 
             //si (val = undefined) alors on teste pas
-            
+
             if(val != undefined){
                 for(let i=1; i<3; i++){
                     if(val != grid[i][y]){
