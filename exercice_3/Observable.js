@@ -6,7 +6,6 @@ class Observable {
 
     on(eventName, callback) {
         this.rep.push(new Repertory(eventName, callback));
-        console.log(callback); // a retirer ?
     }
 
     off(eventName, callback) {
