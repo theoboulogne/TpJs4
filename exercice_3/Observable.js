@@ -1,12 +1,11 @@
 class Observable {
 
     constructor() {
-        this.rep = [];
+        this.rep = []; // creation d'un tableau de stockage pour le repertory
     }
 
     on(eventName, callback) {
         this.rep.push(new Repertory(eventName, callback));
-        console.log(callback);
     }
 
     off(eventName, callback) {

@@ -10,6 +10,7 @@ let test =  (function(){
             }
             return 2;
         }
+
     function colonne(grid)
         {
             for(let j=0; j<3; j++){
@@ -21,6 +22,7 @@ let test =  (function(){
             }
             return 2;
         }
+
     function diagonale (grid) 
         {
             let val = grid[0][0];
@@ -45,6 +47,7 @@ let test =  (function(){
 
             return 2; // si pas alligné
         }
+
     return{
         Fin : (grid) =>
         {   // On enregistre en mémoire pour réduire le nombre d'appel de fonction en cas de renvoi
@@ -55,6 +58,7 @@ let test =  (function(){
             if(tmp !=2) return tmp;
             return undefined;
         },
+        
         CaseLibre : (grid) => {
             for(let i=0; i<3; i++) for(let j=0; j<3; j++){
                 if(grid[i][j]==undefined) return false; // si case libre
